@@ -1,2 +1,8 @@
 require('crypto').randomBytes(64).toString('hex')
 Good for getting tokens
+palettes:
+#2D3047
+#93B7BE
+#E0CA3C
+#A799B7
+#048A81

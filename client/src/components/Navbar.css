@@ -1,0 +1,41 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.navbar {
+  width: 100%;
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  background-color: #2D3047; /* Dark background color */
+  padding: 10px; /* Some padding */
+}
+
+.left, .right{
+  display: flex;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar li {
+  font-family:'Courier New', Courier, monospace;
+  margin-right: 20px; /* Space between links */
+  font-size: 1.2rem;
+  transition: all 1s;
+}
+
+.navbar a {
+  color: white; /* White text color */
+  text-decoration: none; /* Remove underline */
+  padding: 8px 16px; /* Padding around the text */
+  display: block; /* Make the link fill the entire list item */
+}
+
+.navbar a:hover {
+  transform: translateY(-5px);
+  background-color: var(--clr-accent);
+  color: grey;
+}

@@ -1,0 +1,54 @@
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-300px);
+  }
+
+  to {
+    transform: translateX(0px);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+
+.spacer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+  background-color: #93B7BE;
+}
+
+.body-text {
+  font-family:'Courier New', Courier, monospace;
+  font-size: 4rem;
+  margin-top: -300px;
+  animation: slideInLeft 1s ease-in 1 normal both;
+}
+
+.btn {
+  font-family:'Courier New', Courier, monospace;
+  margin-top: 150px;
+  font-size: 1.5rem;
+  padding: 15px 60px;
+  background: #E0CA3C;
+  color: #048A81;
+  animation: fadeIn 1s ease-in 1s 1 normal both;
+  border: 8px solid #048A81;
+  border-radius: 5px;
+}
+
+.btn:hover {
+  transform: translateY(-5px);
+  background-color: var(--clr-accent);
+  color: var(--clr-light)
+}

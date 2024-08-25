@@ -2,6 +2,7 @@ require('dotenv').config()
 const express = require('express')
 const { Client } = require('pg')
 const jwt = require('jsonwebtoken')
+const cors = require('cors')
 
 const app = express()
 const port = process.env.PORT
@@ -50,26 +51,11 @@ client.connect()
 
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
+app.use(cors())
 
 app.get('/', (req, res) => {
   res.send('Home page.')
 })
-
-
-app.get('/login', (req, res) => {
-  res.send(`
-    <h1>Login Page</h1>
-    <form action='/login' method='POST'>
-      <label>Username</label>
-      <input type='text' id='username' name='username' required />
-      <label>Password</label>
-      <input type='text' id='password' name='password' required />
-      <button type='submit'>Login</button>
-    </form>
-    <button onclick="location.href='/signup'">Create Account</button>
-    `)
-})
-
 
 app.post('/login', async (req, res) => {
   const { username, password } = req.body
@@ -84,7 +70,7 @@ app.post('/login', async (req, res) => {
       const user = { username: username, password: password}
       const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET)
 
-      res.json({accessToken: accessToken})
+      res.json({ success: true, username, accessToken })
     } else {
       res.send('Invalid username and password')
     }
@@ -94,22 +80,6 @@ app.post('/login', async (req, res) => {
   
 })
 
-
-app.get('/signup', (req, res) => {
-  res.send(
-  `
-  <h1>Create Account Page</h1>
-    <form action='/signup' method='POST'>
-      <label>Username</label>
-      <input type='text' name='create_username' required />
-      <label>Password</label>
-      <input type='text' name='create_password' required />
-      <button type='submit'>Login</button>
-    </form>
-  `)
-})
-
-
 app.post('/signup', async (req, res) => {
   const { create_username, create_password } = req.body
   try {
@@ -118,7 +88,7 @@ app.post('/signup', async (req, res) => {
       VALUES ($1, $2)
     `, [create_username, create_password])
     console.log('Successfully Added to the Database!')
-    res.redirect('/login')
+    res.redirect('http://localhost:3001/login')
   } catch (err) {
     console.log('Query Error!', err)
     res.redirect('/error')
